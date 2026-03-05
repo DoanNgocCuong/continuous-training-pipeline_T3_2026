@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(chmod +x /home/ubuntu/cuong_dn/Continuous_Traning_Pipeline/scripts/*.sh)",
+      "Bash(xargs -I{} touch {}/__init__.py)",
+      "Bash(python -m pytest tests/unit/ -v --tb=short)"
+    ]
+  }
+}

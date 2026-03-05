@@ -1,0 +1,18 @@
+baseline_model: "Qwen/Qwen2.5-1.5B-Instruct-AWQ"
+
+thresholds:
+  min_accuracy_improvement: 0.005
+  min_f1_macro_improvement: 0.003
+  max_per_class_f1_drop: 0.02
+  min_regression_pass_rate: 1.0
+  min_benchmark_size: 500
+  max_p95_latency_ms: 100
+
+test_sets:
+  benchmark: "data/datasets/{version}/test.jsonl"
+  regression: "data/datasets/regression/regression_test.jsonl"
+  golden: "data/datasets/golden/golden_test.jsonl"
+
+on_reject:
+  log: true
+  alert: false  # Phase 2: enable Slack notification

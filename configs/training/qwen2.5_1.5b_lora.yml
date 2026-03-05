@@ -1,0 +1,35 @@
+base_model: "Qwen/Qwen2.5-1.5B-Instruct"
+output_dir: "data/artifacts"
+load_in_4bit: true
+
+lora:
+  r: 16
+  alpha: 32
+  target_modules: ["q_proj", "k_proj", "v_proj", "o_proj", "up_proj", "down_proj", "gate_proj"]
+  dropout: 0.05
+
+training:
+  num_epochs: 3
+  per_device_batch_size: 8
+  learning_rate: 2.0e-4
+  warmup_ratio: 0.1
+  max_seq_length: 2048
+  gradient_accumulation_steps: 4
+  logging_steps: 10
+  lr_scheduler: "cosine"
+  weight_decay: 0.01
+  fp16: true
+  eval_strategy: "steps"
+  eval_steps: 50
+  save_strategy: "steps"
+  save_steps: 100
+
+data:
+  train_file: "data/datasets/{version}/train.jsonl"
+  val_file: "data/datasets/{version}/val.jsonl"
+  format: "chatml"
+
+quantization:
+  enabled: true
+  method: "awq"
+  bits: 4

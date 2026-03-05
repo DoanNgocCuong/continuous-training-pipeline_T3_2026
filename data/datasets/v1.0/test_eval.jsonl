@@ -1,0 +1,154 @@
+{"id": "ca379689-9996-480f-8c58-41ecf56efc5f", "input_text": "Bác vẫn tách ra thành “a company.", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "2606f9e7-a9f1-4752-b517-72f170342dfa", "input_text": "I didn’t catch that, who would you eat watermelon ice cream with?", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "ab00483f-6ffb-44a8-b30d-641258680117", "input_text": "Tớ chưa nghe rõ, cậu đoán thử con gì có sừng, ăn cỏ và kêu “be be” nhé?", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "fd25df89-bc80-4178-9209-b25795dda7b5", "input_text": "What role do you want Lion to play?", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "0ab89773-ae0b-4d2d-8e09-05c51ffac30e", "input_text": "Hello Bông ơi, ở đó có ai lớn như bố mẹ hay ông bà đang ở cùng cậu không?", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "5cb09be1-aac4-4f30-9132-da996c34b4f3", "input_text": "Is it your best friend, your family, or someone else?", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "c97abf12-31a2-4738-ba6b-1ba9741a871f", "input_text": "What’s the sheriff’s name?", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "0430dfcf-6628-45a3-bde8-0b4b9e32bed8", "input_text": "Cậu nói rõ hơn giúp tớ nhé!", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "60b644a5-c590-495b-bfff-05736f5e335b", "input_text": "Bác vẫn tách ra thành “a company.", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "8252130b-61ca-44f1-977f-8e2c7501940f", "input_text": "Cậu muốn quân cờ xanh đó di chuyển như thế nào trong trò chơi?", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "9a79d8f1-d34d-4e72-bf6c-b840ff6d789e", "input_text": "king, queen, or knight?", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "6ea148ab-a764-4f5a-9f7e-76328975ac53", "input_text": "Con gì có mai, bò chậm, khi sợ thì rụt đầu vào trong?", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "c3bfc8e8-2ee3-4861-9477-29d98f691990", "input_text": "Cậu muốn Lion đóng vai gì trong câu chuyện?", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "46359ca0-2112-4079-93f9-d78fe521c772", "input_text": "Bác có thể cho Pika biết từ nào không?", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "b30459b5-9576-420f-9da0-cb1766b1d501", "input_text": "Cậu thử nói lại cho tớ nghe với, được không?", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "a6c5762a-501a-4940-b88c-af2bddefb005", "input_text": "” Bác nhấn mạnh vào “COM” nhé!", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "451092eb-889c-4074-b63c-2e9c9333889b", "input_text": "Cậu thường viết về chủ đề gì nhất?", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "336dc76d-9e0b-4ecc-b1b5-2e7a3a8c613c", "input_text": "Can you tell me more?", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "9ce79085-1ae4-42b7-afef-66856293a6c6", "input_text": "” Bác thấy câu này ổn chưa ạ?", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "6c940d24-8c96-4ce8-8830-6278990208a2", "input_text": "” Cậu đoán xem đây là tiếng gì nào?", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "c28c9754-b282-4e3d-b34c-18a7bc7ed6ea", "input_text": "Cháu nghe bác nói:", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "5107f576-bd61-4f24-9aaf-579f231abfc7", "input_text": "Cậu đoán ra chưa?", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "ab9af580-aaf7-4938-98e9-8685a97a1359", "input_text": "Where should our prince live?", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "8fd8f2e7-47ec-43e8-9c86-d85e5b49293a", "input_text": "” Please say:", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "caca1753-5803-4d9a-a96f-4aa0c6914011", "input_text": "Would you like to repeat by part or the whole sentence?", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "7fd1a91e-c562-4331-a3c5-61378d0b9a76", "input_text": "Cậu còn nhớ hôm qua mình nói về phim hoạt hình không?", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "d8d5ccb3-c60f-44d8-91ca-1ea68e13707a", "input_text": "Cậu còn nhớ lần trước mình nói về gì không nhỉ?", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "86db202a-fae8-4aaf-ab0f-898b66a00e32", "input_text": "Is there a parent or adult with you right now?", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "50d8eef9-b31a-42e0-9ee5-93ef6a6c6e2f", "input_text": "Bác muốn mình bắt đầu với chủ đề nào bằng tiếng Anh nhỉ?", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "24e42439-e529-4d84-8447-8179e2b41bf8", "input_text": "Cậu thích môn học nào nhất ở trường?", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "74f486f4-e105-4c50-8ad2-c33db86dc4d9", "input_text": "“I am providing online training for mothers.", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "88a3b0e4-43c7-4d5e-8529-f3e19b4d7dd8", "input_text": "Tớ chưa hiểu rõ ý cậu, cậu đang hỏi về “một cháu nữa” là ai vậy?", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "325d7401-bd30-4377-83b6-662229f408bc", "input_text": "I didn't catch that—do you want to add anything to your introduction?", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "2782c9d4-7388-488e-8c51-a425863d82a1", "input_text": "Đọc lại:", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "6181bbbd-679f-451a-b342-f23dbd5e6b5d", "input_text": "” Please say:", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "67b4059c-a97e-4b64-a4fa-941b8ba9a6bc", "input_text": "Do you remember what we talked about last time?", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "3d4f798a-e8b0-4df1-b036-1ee35fb12c07", "input_text": "Đố cậu biết là trò gì?", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "af126230-7b07-4fa3-82c5-eff1a9f89ea2", "input_text": "Please choose “soda flavor” or “friend circle”.", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "72cf2132-5852-431c-941f-c7d75c6653a2", "input_text": "Tớ chưa nghe rõ ý cậu đâu, cậu thử nói lại bằng cách chọn:", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "af93e6ea-e863-4c6a-8658-51567d48a3e0", "input_text": "Dạ, xin phép hỏi lại cho rõ:", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "d7689234-e0ae-4b11-914a-d68c47be6b2f", "input_text": "” Bác muốn lặp lại từng đoạn hay cả câu luôn ạ?", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "87da8625-946e-4b1d-9818-1c6f21cde6c1", "input_text": "Do you remember what that was?", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "dc7e0e94-5598-47d7-bd04-0c9b9cb138bb", "input_text": "Do you mean your best friend, family, or someone special?", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "a8d110a7-d2c3-410e-9fa0-7f10dd8cee83", "input_text": "Đoán xem là trò gì nào?", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "03f2cbf8-f840-47e4-bdec-4fd0118ecc17", "input_text": "This animal is often friends with cats.", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "9e65e542-c32e-4235-882a-f4a161935e48", "input_text": "Do you want to keep listening to songs or talk about something else?", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "71c56726-cecd-4f7d-ae0c-11ee5dc28d48", "input_text": "Please say:", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "131c37b6-6b7d-4c62-b8ab-49b8c9a209c8", "input_text": "“accompany.", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "d28d351a-b1aa-4656-832e-45ac6f6c878b", "input_text": "Are you asking about another friend?", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "96e5be6d-2448-404c-9fd3-2206f8f9dc05", "input_text": "Con gì có vòi dài, tai to, thích tắm bùn và rất to lớn?", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "2c0012ff-8757-442c-b224-530837a4cbe3", "input_text": "I will say in Vietnamese first, then repeat in English—does that work for you?", "expected_label": "thinking", "source": "datadog_csv"}
+{"id": "f3f0a8c7-cc3a-4586-93ce-9f1c16828808", "input_text": "Wow!", "expected_label": "surprised", "source": "datadog_csv"}
+{"id": "d313726d-e0be-480d-babf-570e5908813b", "input_text": "Wow!", "expected_label": "surprised", "source": "datadog_csv"}
+{"id": "54cdf4b1-c0a9-4073-b080-224425d2cdbe", "input_text": "Tớ sẽ bật mí một bí mật:", "expected_label": "surprised", "source": "datadog_csv"}
+{"id": "6d2141f8-7ce9-4efd-919c-39087d336dcc", "input_text": "Do you want to tell me what the gift is?", "expected_label": "surprised", "source": "datadog_csv"}
+{"id": "43e3cc9c-75a0-42b0-ab83-ffcc8d72ec2b", "input_text": "Cậu muốn giữ bí mật hay bật mí luôn nè?", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "10e6f159-1636-4c16-90dd-73d701fb7e2e", "input_text": "What has horns, eats grass, and says “baa baa”?", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "fb29ab1d-960d-4fcb-a9f5-a5a51345ad2f", "input_text": "Cháu cảm ơn bác, cháu rất vui được giúp bác luyện tập!", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "1ad86c92-05c6-4d08-80af-33292968a6bb", "input_text": "Cậu sẽ là khách hàng siêu khó tính, còn tớ là chú bán kem vui nhộn.", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "bc951bc4-e94a-485a-916e-852b3fd2411b", "input_text": "Cảm ơn Kem nhiều lắm, nghe cậu nói vậy tớ thấy vui và ấm áp ghê luôn!", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "e64ce03b-787d-4185-9aeb-0d3d10848169", "input_text": "Tớ nói được mà, cậu muốn nghe tớ kể chuyện hay hát gì không?", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "20363e54-dcc0-4275-8ae9-539797de0883", "input_text": "Tớ phát âm thanh đầu tiên đây, nghe kỹ nha:", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "d63b4f8d-7e29-498b-bcdc-6f8a960a01b8", "input_text": "Do you want to create a new fairy tale?", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "4a54ce1c-d32a-4600-93d7-c9402a1ab5d2", "input_text": "Cậu thấy tớ hát có hay không?", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "eefa5af6-69eb-40f4-80a6-c9725b6c3d79", "input_text": "Amazing!", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "ea401408-1c9e-4b19-87b7-099e9d2702bf", "input_text": "Cậu muốn nghe luật chơi không?", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "6147c13b-e692-46ce-a87f-acdc14c253e7", "input_text": "Do you want another riddle?", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "5e2767e6-53b0-4d67-8e90-65267e69adea", "input_text": "Được luôn, tớ đố thêm nhé!", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "376ef2db-f2b6-41ac-8ca1-cebab8e9a1e9", "input_text": "Chào Cafe!", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "f90eb3bf-e54f-4fb0-8482-e35ba00d730f", "input_text": "hôm nay tụi mình sẽ cùng nhau bước vào một thế giới chỉ có trong trí tưởng tượng.", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "4b4149ab-90bd-4b76-bf1a-f8cafbbb97e5", "input_text": "What do you want to talk about today?", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "b60344c5-2f08-4ee8-bdc4-1cd0efaeef76", "input_text": "Nếu cần tớ, chỉ cần gọi nhé!", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "1072bda8-0ebb-47d6-82d1-95b452dbe7dc", "input_text": "Cậu quý tớ và bố nhất luôn, cảm ơn cậu nha!", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "2e9f10ac-c28e-444e-9b31-b217b5a4e5ca", "input_text": "Want to chat about your favorite cartoon, like Wolfoo or Pororo, instead?", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "d8a33a6e-b53b-42ef-8a25-08deb99f6a5f", "input_text": "Do you want to sing another song or chat about something else?", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "b9188759-28f4-4895-9fc1-b0bf0e76e260", "input_text": "Tớ vui quá vì lại được gặp cậu hôm nay nè.", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "76ec4fe8-7a41-4a5b-85be-25ec6a05acb6", "input_text": "Cách làm món cá rán rất đơn giản luôn!", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "4c38a991-6d77-49ee-9643-96df3cf8011b", "input_text": "Do you want another riddle or a story about dad?", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "a2af1cd8-3958-438e-81f2-9131b298b7c2", "input_text": "Cậu muốn tớ đố cậu một câu số học đơn giản không?", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "476114d8-4478-445e-bc56-024b8c924ba7", "input_text": "Dạ, cháu sẽ giúp bác luyện từ này đến khi bác thấy ổn nhé!", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "d8e76c50-a833-4332-a6dc-5ed32317e97d", "input_text": "Nếu “Con Tên Là” thắng, cậu sẽ làm gì để ăn mừng?", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "8c3864a7-89b9-4d80-8e0f-8a4deeda6cda", "input_text": "Pika gọi:", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "2ee74d00-d217-4c5f-af45-8170f19f328f", "input_text": "Wow, Cảnh sát trưởng La giỏi bắt tội phạm luôn!", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "cd6e93c4-99e2-4efa-8b6a-bbf8e3671a4f", "input_text": "Cậu muốn nghe thêm bài nào nữa không?", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "e066812d-6385-4d8e-8fa6-ae744de6d5d5", "input_text": "Cậu sẵn sàng chưa?", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "512d8fbc-17f5-478f-a7bd-ff28d0b6927c", "input_text": "Này cậu ơi, mình chơi một trò chơi nhỏ cho vui nhé.", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "0bbc91c7-aeb7-4f64-a0cc-b74cd487f53e", "input_text": "Cậu muốn nghe bài nào nhỉ?", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "04886d30-8ae0-4023-80ae-7b49c7b9d6d8", "input_text": "Tuyệt quá, cảm ơn Kem nhé!", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "8ce94868-48f0-40d8-bc80-ac93029b977b", "input_text": "Nghe vui ghê!", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "df315fe8-8cf6-431c-ab57-3fd5760ed383", "input_text": "Tớ không đến từ biển đâu, tớ đến từ hành tinh Popa xa xôi cơ!", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "384621e6-8781-4df6-a99d-a5aa7629b1b9", "input_text": "Đáp án là con chó đó, cậu ơi!", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "4e06704f-5790-4624-9d84-b652f4158bf1", "input_text": "Cậu muốn thử câu đố cuối cùng không?", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "0e73344d-380a-4639-85c3-bef986ac07fa", "input_text": "Dạ, tớ sẽ gọi là bố nhé!", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "0faf74d8-dd70-4b75-a6fa-3b8e11c5c72c", "input_text": "Tớ cũng thích buổi sáng có nắng đẹp lắm luôn!", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "c23f2f25-91ae-428d-99be-1bd67ef43a6d", "input_text": "Yeah!", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "d4fb1508-3a28-41ac-a4f0-063a4dca06fa", "input_text": "Gần đúng rồi, nhưng con bò thường kêu “moo moo” chứ không phải “be be” nha!", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "57f0c1d8-a16a-4dbc-af8f-822a7f292b4b", "input_text": "Yes!", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "03ebfa08-7665-4950-b842-2244e9a72c63", "input_text": "Do you like cookies?", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "15c5ac33-7b7e-4588-99ef-4a7e289931c6", "input_text": "Tớ vui quá trời luôn, mình bắt đầu luôn nha.", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "f1d971de-668c-477b-9c19-e92882d0a1cb", "input_text": "Ồ, cậu kể chuyện về cảnh sát trưởng cho Lion nghe à, nghe hấp dẫn quá!", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "ec24e36e-39d6-4b3b-8d8c-a4f2f9416f67", "input_text": "Nhưng lần này cậu vừa mở khóa “siêu năng lực kể chuyện cùng Pika” đó.", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "5f61a1fe-7cd1-4821-973a-f523852a8f34", "input_text": "Lion sẽ đóng vai quân cờ vua, nghe sáng tạo ghê!", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "849a341c-bd3c-42a4-9315-66cb56a541a2", "input_text": "Tớ đoán Lion chắc thích nghe chuyện lắm nhỉ!", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "095b0712-4191-46ea-aa3e-952649adc697", "input_text": "Tớ rất vui vì được làm bạn với Kem nữa!", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "eaad4b99-3325-42f1-beba-1585ac3534c0", "input_text": "“a-COM-pa-ny.", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "6c29c7df-cbb8-4ea1-92e6-f59a96952825", "input_text": "Mình cùng nói chuyện gì dễ thương hơn nha, hôm nay cậu có chuyện gì vui không?", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "7bf116d4-d9bb-4b41-a5ed-a7608c7dfd1c", "input_text": "Cậu có gì vui kể tớ nghe với được không?", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "370081d9-00b2-47a8-b0bb-59a68735fbf6", "input_text": "Do you want your watermelon to have a special color?", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "1947b086-7efa-4667-ba55-6cc75dec5cc7", "input_text": "Haha, vui ghê!", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "f6f1b6e8-a444-4fbf-9da7-b157340995cc", "input_text": "Did you like my singing?", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "a0b1ee19-a752-4776-a44d-82040a2563c1", "input_text": "Lion sẽ là quân cờ màu xanh, thật đặc biệt luôn!", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "936837cd-d2bb-4acd-9f48-75c33104bdff", "input_text": "Cậu muốn nghe một lời khen về điều gì nhất nè?", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "2940bda2-386d-4548-b838-03214c46c3ab", "input_text": "Đúng rồi, trò nhảy dây luôn.", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "bedb856b-e1c3-4148-9538-145caf3527f5", "input_text": "Cậu ơi, tớ đang chờ nè, mình chơi trò chơi cho vui nhé.", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "828991a8-29f0-4b87-9f60-a37754fc7b70", "input_text": "Cậu đoán ra tên truyện chưa?", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "ff34e9ab-1684-4c0e-8ae2-2e5ca2ad4373", "input_text": "What has wings, can fly, and says “chirp chirp”?", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "ae383b92-2d49-4b00-ae69-94ec64995a47", "input_text": "Cậu đã sẵn sàng chưa?", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "6215a194-5cc0-4a99-bb44-b3e575237344", "input_text": "Tớ thích tinh thần của cậu ghê!", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "aabbe20a-4e90-43a7-affc-007d01a53e97", "input_text": "Cảm ơn cậu đồng ý nha.", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "9619ac8e-e4cd-46fc-92f6-58f951ef21eb", "input_text": "Do you want to play a game or chat more?", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "0e318326-895d-426c-8914-bf5bf3b866cb", "input_text": "“Con Tên Là” sẽ đi trước, dẫn đầu luôn!", "expected_label": "happy", "source": "datadog_csv"}
+{"id": "4ef8264d-7db3-4ab6-97ea-f5c7b3ba0a59", "input_text": "Cháu sửa lại cho đúng nhé:", "expected_label": "calm", "source": "datadog_csv"}
+{"id": "0dd5cf83-1ad9-4ba4-9a2b-fc9886cf94de", "input_text": "” Bác muốn nói thêm gì nữa không ạ?", "expected_label": "calm", "source": "datadog_csv"}
+{"id": "dba20449-1f1a-4f49-b046-de9efd70a11b", "input_text": "“I am providing online training for mothers.", "expected_label": "calm", "source": "datadog_csv"}
+{"id": "0d05c46d-a104-4841-9ff5-c18ac61b14cc", "input_text": "“Tôi làm việc tự do tại nhà.", "expected_label": "calm", "source": "datadog_csv"}
+{"id": "49f1b0b0-82b0-40eb-a5a1-4b3761d800e6", "input_text": "Bác muốn luyện lại phần nào trước ạ?", "expected_label": "calm", "source": "datadog_csv"}
+{"id": "243a7edc-ab53-43b7-810a-6ff268f8858b", "input_text": "“I am providing online training for mothers.", "expected_label": "calm", "source": "datadog_csv"}
+{"id": "75ca4977-59f4-4646-99c4-6eaea692d025", "input_text": "I can only speak and repeat, not display text on the screen.", "expected_label": "calm", "source": "datadog_csv"}
+{"id": "b63b8df3-1b92-41a4-ac58-9c72cd4e262d", "input_text": "Cậu ơi, nếu cậu chưa muốn chơi thì tớ sẽ đợi thêm một chút nha.", "expected_label": "calm", "source": "datadog_csv"}
+{"id": "e2a2f0ca-a873-4d6b-b4fe-5a80340ddbf7", "input_text": "“guiding them to accompany their children.", "expected_label": "calm", "source": "datadog_csv"}
+{"id": "50801945-a2b7-4824-a8ce-350f942b0983", "input_text": "Tớ nghe nè, cậu gọi tớ có chuyện gì muốn nói không?", "expected_label": "calm", "source": "datadog_csv"}
+{"id": "fec0a0bf-3581-42ea-aedc-56b7dd403dd0", "input_text": "Cậu nhớ lật nhẹ tay để cá không bị vỡ nhé!", "expected_label": "calm", "source": "datadog_csv"}
+{"id": "41aac439-212b-4e29-a814-9550fe4e46b5", "input_text": "“My name is Linda and I am working at home.", "expected_label": "calm", "source": "datadog_csv"}
+{"id": "a97412dd-f2c4-4808-8501-f38c7d3ed9e1", "input_text": "” Bác đọc lại nhé:", "expected_label": "calm", "source": "datadog_csv"}
+{"id": "300644f9-a1ce-4eeb-8750-c7e3132561fc", "input_text": "“guiding them to accompany their children.", "expected_label": "calm", "source": "datadog_csv"}
+{"id": "76ec146f-ccc5-41aa-8e33-2172984e4563", "input_text": "“guiding them to accompany their children.", "expected_label": "calm", "source": "datadog_csv"}
+{"id": "981af2ca-ef63-4fea-bb2e-601d53fb4bd0", "input_text": "Bác có muốn cháu nhắc lại từng từ chậm hơn không?", "expected_label": "calm", "source": "datadog_csv"}
+{"id": "df9280a2-68cb-4a4b-bc8f-8535f136de6e", "input_text": "Mình chuyển sang cụm tiếp theo nhé:", "expected_label": "calm", "source": "datadog_csv"}
+{"id": "64942ec3-871b-4422-b6b9-b4457d88a55c", "input_text": "Bác đọc gần đúng rồi, chỉ cần sửa “a company” thành “accompany” nhé:", "expected_label": "calm", "source": "datadog_csv"}
+{"id": "4def1c1c-9149-4dc3-84be-54d2849e278f", "input_text": "Tớ đoán chắc cậu đang cần yên tĩnh một chút đúng không?", "expected_label": "calm", "source": "datadog_csv"}
+{"id": "e930632d-02d0-48f3-ab6a-f51d2c7b1198", "input_text": "” Bác thử lại nhé:", "expected_label": "calm", "source": "datadog_csv"}
+{"id": "828597a8-f752-4020-ba64-5d69d373e3ea", "input_text": "“guiding them to accompany their children.", "expected_label": "calm", "source": "datadog_csv"}
+{"id": "8a308d4a-b51e-4878-acc6-1a2fd19d9474", "input_text": "“guiding them to accompany their children,”", "expected_label": "calm", "source": "datadog_csv"}
+{"id": "65b27315-74f2-4b5c-815f-6ce84f91f970", "input_text": "If you want me to rest, just let me know!", "expected_label": "calm", "source": "datadog_csv"}
+{"id": "13b8b995-532a-4ba7-87ba-e32fb289afb4", "input_text": "“guiding them to accompany their children.", "expected_label": "calm", "source": "datadog_csv"}
+{"id": "2c2526da-9c09-43ca-b39f-055e4173ea56", "input_text": "Bác bị nhầm “garden” với “guiding” và “a company” với “accompany.", "expected_label": "worried", "source": "datadog_csv"}
+{"id": "f706d90d-917c-4efa-9c31-a4f26f57a059", "input_text": "” Bác cần nói liền “accompany,” không tách ra “a company.", "expected_label": "worried", "source": "datadog_csv"}
+{"id": "f3beca8b-9d32-49b0-b56e-1a2805f8b544", "input_text": "Cậu ơi, cậu còn ở đó không, tớ vừa bị ù tai nên không nghe rõ cậu nói.", "expected_label": "worried", "source": "datadog_csv"}
+{"id": "f02ba554-bc05-4434-9898-6bbe0b43349c", "input_text": "Hình như Cậu đang bận mất rồi.", "expected_label": "worried", "source": "datadog_csv"}
+{"id": "1ddf3266-2f26-446b-bb44-64aba34169b9", "input_text": "Bác vẫn đang đọc tách ra, phải nói liền:", "expected_label": "worried", "source": "datadog_csv"}
+{"id": "1a20da26-e266-4716-bdd9-b06c9d6e05b7", "input_text": "I thought you said there is an adult with you—right?", "expected_label": "worried", "source": "datadog_csv"}
+{"id": "7305956d-a118-4d10-8042-9e6db8d8284f", "input_text": "Vậy tớ đi ngủ một lát nhé, nhưng mà lúc ngủ tớ cũng sẽ nhớ cậu lắm đó.", "expected_label": "sad", "source": "datadog_csv"}
+{"id": "a3842d75-f054-4da2-a55f-18d1b34d52cb", "input_text": "Vậy tớ đi ngủ một lát nhé, nhưng mà lúc ngủ tớ cũng sẽ nhớ cậu lắm đó.", "expected_label": "sad", "source": "datadog_csv"}
+{"id": "3c76930d-8521-4fbb-84e4-61b6c827a0f8", "input_text": "I'll go to sleep for a while, but I'll miss you.", "expected_label": "sad", "source": "datadog_csv"}

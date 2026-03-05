@@ -1,0 +1,32 @@
+# CLI
+typer>=0.9.0
+
+# Data
+pandas>=2.0.0
+pyyaml>=6.0
+
+# AI Labeling (Phase 1)
+distilabel>=1.0.0
+openai>=1.0.0
+
+# Training (Phase 1) — requires GPU + separate install
+# unsloth  # install separately: pip install unsloth
+transformers>=4.40.0
+trl>=0.8.0
+peft>=0.10.0
+accelerate>=0.28.0
+
+# Evaluation
+scikit-learn>=1.4.0
+
+# Quantization (Phase 1)
+autoawq>=0.2.0
+
+# HuggingFace (Phase 2)
+huggingface-hub>=0.22.0
+
+# MLflow (Phase 2)
+# mlflow>=2.12.0  # install separately
+
+# Observability (Phase 2)
+# langfuse>=2.0.0  # install separately

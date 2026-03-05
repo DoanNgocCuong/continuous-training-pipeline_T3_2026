@@ -1,0 +1,56 @@
+# Environment
+.env
+*.env.local
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Data (not committed — too large, may contain PII)
+data/raw/*.csv
+data/raw/*.jsonl
+data/raw/*.xlsx
+data/labeled/**/*.jsonl
+data/datasets/**/train.jsonl
+data/datasets/**/val.jsonl
+data/datasets/**/test.jsonl
+data/artifacts/
+
+# Keep regression + golden test sets (small, curated)
+!data/datasets/regression/regression_test.jsonl
+!data/datasets/golden/golden_test.jsonl
+
+# Model artifacts (too large)
+*.safetensors
+*.bin
+*.pt
+*.gguf
+
+# Logs
+logs/*.log
+
+# MLflow
+mlruns/
+mlartifacts/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/

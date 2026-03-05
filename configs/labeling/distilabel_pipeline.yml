@@ -1,0 +1,29 @@
+labeler:
+  model: "gpt-4o-mini"
+  temperature: 0.0
+  max_tokens: 20
+  batch_size: 50
+
+system_prompt: |
+  You are an emotion classifier for a children's educational robot (Pika Robot).
+  Given the robot's previous response and current response, classify the emotion
+  expressed in the CURRENT response into exactly one of these 8 categories:
+  happy, achievement, thinking, calm, sad, worried, angry, surprised.
+
+  Respond with ONLY the emotion label, nothing else.
+
+user_prompt_template: |
+  Previous Pika Robot's Response: {previous_response}
+  Now Pika Robot's Response need check: {current_response}
+
+output:
+  field: "ai_label"
+  valid_labels:
+    - happy
+    - achievement
+    - thinking
+    - calm
+    - sad
+    - worried
+    - angry
+    - surprised

@@ -1,0 +1,13 @@
+strategy: "three_way"
+
+rules:
+  ai_human_model_agree: "auto_approve"
+  ai_human_agree_model_disagree: "auto_approve"
+  ai_model_agree_human_disagree: "trust_human"
+  ai_human_disagree: "flag_for_review"
+  no_human_ai_model_agree: "auto_approve_low_confidence"
+  no_human_ai_model_disagree: "pending"
+
+minimum_for_training:
+  approved_samples: 100
+  flagged_ratio_max: 0.3  # nếu >30% flagged → cảnh báo data quality
