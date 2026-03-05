@@ -153,8 +153,8 @@
 | 2. Label | ✅ | GPT-4o-mini labeling (~$0.009) |
 | 3. Build | ✅ | train=697, val=149, test=154 |
 | 4. Train | ✅ | Qwen2.5-1.5B + LoRA (3 epochs, 3.5 min) |
-| 5. Evaluate | ☐ | Pending - need run evaluation |
-| 6. Decide | ☐ | Pending evaluation |
+| 5. Evaluate | ✅ | Accuracy 35.7%, F1 Macro 27.8% |
+| 6. Decide | ✅ | Reject - below promotion thresholds |
 
 ### Label Distribution (1000 samples)
 ```
@@ -178,6 +178,25 @@ Training time: ~3.5 minutes
 GPU: RTX 3090 24GB
 Model saved: data/artifacts/training/lora_adapter/
 ```
+
+### Evaluation Results (v1.0)
+```
+Accuracy: 35.7%
+F1 Macro: 27.8%
+Per-class F1:
+  - happy: 14.1%
+  - achievement: 0.0%
+  - thinking: 45.8%
+  - calm: 44.4%
+  - sad: 50.0%
+  - worried: 42.9%
+  - angry: 0.0%
+  - surprised: 25.0%
+Regression pass rate: 0.0%
+Benchmark size: 154
+```
+
+**Note**: Low accuracy due to small dataset (697 train samples) and class imbalance.
 
 ### Cost Tracking
 - Labeling 1000 samples: ~$0.009 (GPT-4o-mini)
@@ -243,9 +262,9 @@ cat data/artifacts/latest/eval_result.json
 - Label: ✅
 - Build: ✅
 - Train: ✅
-- Evaluate: ☐ (Run with: `python -m finetune.main evaluate --version v1.0`)
-- Decide: ☐
+- Evaluate: ✅ (Accuracy 35.7%, F1 Macro 27.8%)
+- Decide: ✅ (Rejected - below promotion thresholds)
 
 ---
 
-*Last updated: 2026-03-06 02:10*
+*Last updated: 2026-03-06 02:30*
