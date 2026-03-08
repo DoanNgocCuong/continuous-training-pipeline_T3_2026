@@ -1,0 +1,116 @@
+# Canary Deployment Configuration
+# Gradual rollout and rollback settings
+
+# Canary deployment settings
+canary:
+  # Initial traffic percentage for canary
+  initial_traffic_percent: 10
+
+  # Traffic increment percentages
+  traffic_increments:
+    - 25
+    - 50
+    - 75
+    - 100
+
+  # Time between increments (seconds)
+  increment_interval: 300  # 5 minutes
+
+# Health check settings
+health_checks:
+  # Enable health checks
+  enabled: true
+
+  # Check interval (seconds)
+  check_interval: 30
+
+  # Timeout per check (seconds)
+  timeout: 10
+
+  # Number of consecutive successes required
+  success_threshold: 3
+
+  # Number of consecutive failures before rollback
+  failure_threshold: 3
+
+  # Metrics to monitor
+  metrics:
+    # Error rate threshold (percentage)
+    error_rate_threshold: 1.0
+
+    # Latency p95 threshold (ms)
+    latency_p95_threshold: 500
+
+    # Latency p99 threshold (ms)
+    latency_p99_threshold: 1000
+
+    # Availability threshold (percentage)
+    availability_threshold: 99.0
+
+# Rollback settings
+rollback:
+  # Auto-rollback on failure
+  auto_rollback: true
+
+  # Rollback if health check fails
+  rollback_on_health_failure: true
+
+  # Rollback thresholds
+  thresholds:
+    # Error rate above this triggers rollback
+    error_rate: 2.0
+
+    # Latency p95 above this triggers rollback
+    latency_p95: 1000
+
+    # Availability below this triggers rollback
+    availability: 98.0
+
+  # Grace period before rollback (seconds)
+  grace_period: 60
+
+# Promotion settings
+promotion:
+  # Auto-promote if all checks pass
+  auto_promote: true
+
+  # Require manual approval for production
+  require_approval_for_production: true
+
+  # Approval timeout (seconds)
+  approval_timeout: 3600  # 1 hour
+
+# MLflow integration
+mlflow:
+  # Model name in registry
+  model_name: emotion-classifier
+
+  # Stage names
+  stages:
+    staging: Staging
+    production: Production
+
+  # Use existing version for canary
+  use_existing_version: true
+
+# Monitoring
+monitoring:
+  # Collect metrics during canary
+  collect_metrics: true
+
+  # Metrics backend
+  metrics_backend: mlflow
+
+  # Log comparison (canary vs production)
+  log_comparison: true
+
+# Service endpoints
+service:
+  # Model inference endpoint
+  inference_endpoint: ${INFERENCE_ENDPOINT:-http://localhost:8000/predict}
+
+  # Health check endpoint
+  health_endpoint: ${HEALTH_ENDPOINT:-http://localhost:8000/health}
+
+  # Metrics endpoint
+  metrics_endpoint: ${METRICS_ENDPOINT:-http://localhost:8000/metrics}

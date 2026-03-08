@@ -1,0 +1,65 @@
+# Langfuse Observability Configuration
+# Tracing, cost tracking, and metrics
+
+# Langfuse credentials
+langfuse:
+  # Public key (from Langfuse dashboard)
+  public_key: ${LANGFUSE_PUBLIC_KEY:-}
+
+  # Secret key
+  secret_key: ${LANGFUSE_SECRET_KEY:-}
+
+  # Host (cloud or self-hosted)
+  host: ${LANGFUSE_HOST:-https://cloud.langfuse.com}
+
+# Tracing settings
+tracing:
+  # Enable tracing (can be disabled for local dev)
+  enabled: ${LANGFUSE_ENABLED:-true}
+
+  # Service name (for grouping traces)
+  service_name: emotion-ct-pipeline
+
+  # Version
+  version: ${PIPELINE_VERSION:-v1.0}
+
+  # Sample rate (1.0 = 100%, 0.1 = 10%)
+  sample_rate: 1.0
+
+  # Spans to track
+  spans:
+    - labeling
+    - training
+    - evaluation
+    - inference
+
+# Cost tracking
+cost_tracking:
+  # Track API costs
+  enabled: true
+
+  # Track token counts
+  track_tokens: true
+
+  # Track latency
+  track_latency: true
+
+  # Cost per 1K tokens (USD)
+  pricing:
+    gpt4o_mini:
+      input: 0.00015  # $0.15 per 1M tokens
+      output: 0.0006  # $0.60 per 1M tokens
+
+# Release tracking
+release:
+  # Track releases
+  enabled: true
+
+  # Release name template
+  name_template: emotion-ct-${version}
+
+  # Tags
+  tags:
+    - emotion-classification
+    - pika-robot
+    - continuous-training

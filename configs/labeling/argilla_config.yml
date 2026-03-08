@@ -1,0 +1,52 @@
+# Argilla Configuration
+# Human-in-the-Loop labeling interface
+
+workspace: emotion-pipeline
+dataset_name: emotion-samples
+
+# Argilla server
+argilla:
+  host: localhost
+  port: 6900
+  api_url: http://localhost:6900
+  api_key: ${ARGILLA_API_KEY:-admin.apikey}
+
+# Review workflow settings
+review:
+  # Fields to show in Argilla UI
+  fields:
+    - name: input_text
+      type: text
+    - name: ai_label
+      type: label
+    - name: human_label
+      type: label
+    - name: confidence
+      type: float
+
+  # Label options (13 emotions)
+  labels:
+    - happy
+    - achievement
+    - thinking
+    - calm
+    - sad
+    - worried
+    - angry
+    - surprised
+    - sending_heart
+    - sun_glassed
+    - dizzy
+    - sobbing
+    - superhero
+
+  # Batch size for pushing to Argilla
+  batch_size: 100
+
+  # Questions for annotators
+  questions:
+    - name: emotion
+      title: What emotion does this sample express?
+      description: Select the most appropriate emotion label
+      type: label_selection
+      labels: ${labels}

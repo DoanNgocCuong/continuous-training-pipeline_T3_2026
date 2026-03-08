@@ -1,0 +1,62 @@
+# HuggingFace Configuration
+# Model and dataset publishing settings
+
+# Default repository
+repo:
+  organization: ${HF_ORG:-pika-robot}
+  dataset_name: emotion-classification
+  model_name: qwen2.5-1.5b-emotion
+
+# Dataset settings
+dataset:
+  # Dataset format on Hub
+  repo_type: dataset
+
+  # Visibility (public or private)
+  visibility: public
+
+  # Tags for dataset
+  tags:
+    - emotion-classification
+    - pika-robot
+    - fine-tuned
+
+# Model settings
+model:
+  # Model repo type (model)
+  repo_type: model
+
+  # Visibility
+  visibility: public
+
+  # Tags
+  tags:
+    - qwen
+    - emotion-classification
+    - lora
+    - pika-robot
+
+# Model card template
+model_card:
+  # Base model
+  base_model: Qwen/Qwen2.5-1.5B-Instruct
+
+  # License
+  license: apache-2.0
+
+  # Language
+  language:
+    - en
+
+  # Tags
+  tags:
+    - text-classification
+    - emotion-detection
+
+  # Metrics to include in model card
+  metrics:
+    - accuracy
+    - f1_macro
+
+  # Eval results file (relative to data/artifacts)
+  eval_results_path: latest/eval_result.json

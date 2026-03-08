@@ -1,0 +1,87 @@
+# Pipeline Schedule Configuration
+# GitHub Actions and scheduled pipeline settings
+
+# Schedule settings
+schedule:
+  # Cron expression (weekly on Monday at 2 AM)
+  cron: "0 2 * * 1"
+
+  # Timezone
+  timezone: UTC
+
+  # Enable/disable schedule
+  enabled: true
+
+# Manual trigger settings
+manual_trigger:
+  # Allow manual dispatch
+  enabled: true
+
+  # Required inputs
+  inputs:
+    version:
+      type: string
+      description: Version tag (e.g., v1.0)
+      required: true
+      default: v1.0
+
+    skip_labeling:
+      type: boolean
+      description: Skip AI labeling step
+      required: false
+      default: false
+
+    skip_training:
+      type: boolean
+      description: Skip training step
+      required: false
+      default: false
+
+# Data threshold settings
+data_threshold:
+  # Minimum new samples to trigger pipeline
+  min_new_samples: 500
+
+  # Check for new data since last run
+  check_since_last_run: true
+
+  # Data source path
+  source_path: data/raw/
+
+# Pipeline step settings
+pipeline_steps:
+  # Which steps to run
+  steps:
+    - collect
+    - label
+    - build
+    - train
+    - evaluate
+    - decide
+    - publish
+
+  # Skip steps (override manual_trigger)
+  skip_steps: []
+
+# Notification settings
+notification:
+  # Channels to notify
+  channels:
+    - slack
+    # - discord
+
+  # Notify on
+  events:
+    - pipeline_start
+    - pipeline_complete
+    - pipeline_failed
+    - promotion_decided
+
+# Thresholds for auto-promotion
+promotion:
+  # Auto-promote if thresholds met
+  auto_promote: false
+
+  # Thresholds (same as promotion_rules.yml)
+  accuracy_threshold: 0.40
+  f1_macro_threshold: 0.35

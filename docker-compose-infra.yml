@@ -39,7 +39,7 @@ services:
       # Init script tạo database argilla và mlflow khi container khởi tạo lần đầu
       - ./docker/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
     ports:
-      - "${POSTGRES_PORT:-5432}:5432"
+      - "${POSTGRES_PORT:-5433}:5432"
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-admin}" ]
       interval: 5s
@@ -70,7 +70,7 @@ services:
     volumes:
       - elasticsearch_data:/usr/share/elasticsearch/data
     ports:
-      - "${ELASTICSEARCH_PORT:-9200}:9200"
+      - "${ELASTICSEARCH_PORT:-9201}:9200"
     ulimits:
       memlock:
         soft: -1
@@ -95,7 +95,7 @@ services:
     container_name: ct-argilla-redis
     profiles: [ argilla, all ]
     ports:
-      - "${ARGILLA_REDIS_PORT:-6379}:6379"
+      - "${ARGILLA_REDIS_PORT:-6481}:6379"
     healthcheck:
       test: [ "CMD", "redis-cli", "ping" ]
       interval: 5s
@@ -108,7 +108,7 @@ services:
     container_name: ct-argilla
     profiles: [ argilla, all ]
     ports:
-      - "${ARGILLA_PORT:-6900}:6900"
+      - "${ARGILLA_PORT:-6901}:6900"
     environment:
       ARGILLA_ELASTICSEARCH: http://elasticsearch:9200
       # asyncpg driver cho PostgreSQL async
@@ -160,8 +160,8 @@ services:
     container_name: ct-minio
     profiles: [ mlflow, all ]
     ports:
-      - "${MINIO_API_PORT:-9000}:9000" # S3 API
-      - "${MINIO_CONSOLE_PORT:-9001}:9001" # Web UI
+      - "${MINIO_API_PORT:-9010}:9000" # S3 API
+      - "${MINIO_CONSOLE_PORT:-9011}:9001" # Web UI
     environment:
       MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioadmin}
       MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minioadmin}
@@ -204,7 +204,7 @@ services:
     container_name: ct-mlflow
     profiles: [ mlflow, all ]
     ports:
-      - "${MLFLOW_PORT:-5000}:5000"
+      - "${MLFLOW_PORT:-5010}:5000"
     environment:
       # S3 → MinIO
       MLFLOW_S3_ENDPOINT_URL: http://minio:9000

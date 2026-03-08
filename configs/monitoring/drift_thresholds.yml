@@ -1,0 +1,98 @@
+# Drift Monitoring Thresholds
+# Alert thresholds for data and performance drift
+
+# Data drift detection
+data_drift:
+  # Label distribution drift thresholds
+  label_distribution:
+    # KL Divergence threshold (0 = identical, higher = more different)
+    kl_divergence_threshold: 0.1
+
+    # Population Stability Index threshold
+    psi_threshold: 0.25
+
+    # Chi-squared test p-value threshold
+    chi2_pvalue_threshold: 0.05
+
+  # Confidence drift
+  confidence:
+    # Mean confidence drop threshold (percentage)
+    mean_confidence_drop_threshold: 0.10
+
+    # Std deviation increase threshold
+    std_increase_threshold: 0.20
+
+  # Check frequency
+  check_frequency: daily
+
+# Performance drift detection
+performance_drift:
+  # Accuracy drift
+  accuracy:
+    # Absolute drop threshold (percentage points)
+    absolute_drop_threshold: 0.05
+
+    # Relative drop threshold (percentage)
+    relative_drop_threshold: 0.10
+
+  # F1 Macro drift
+  f1_macro:
+    # Absolute drop threshold
+    absolute_drop_threshold: 0.03
+
+    # Relative drop threshold
+    relative_drop_threshold: 0.10
+
+  # Per-class F1 drift
+  per_class_f1:
+    # Per-class F1 drop threshold (percentage points)
+    per_class_drop_threshold: 0.05
+
+    # Number of classes that can violate before alert
+    max_violating_classes: 2
+
+  # Latency drift
+  latency:
+    # p95 latency increase threshold (percentage)
+    p95_increase_threshold: 0.20
+
+    # p99 latency increase threshold
+    p99_increase_threshold: 0.30
+
+# Concept drift detection
+concept_drift:
+  # Monitor for distribution shift in predictions
+  prediction_distribution:
+    # KS test p-value threshold
+    ks_pvalue_threshold: 0.05
+
+  # Error rate drift
+  error_rate:
+    # Error rate increase threshold
+    increase_threshold: 0.02
+
+# Alert settings
+alerts:
+  # Alert channels
+  channels:
+    - slack
+    - email
+
+  # Alert on
+  alert_on:
+    - data_drift
+    - performance_drift
+    - concept_drift
+
+  # Severity levels
+  severity:
+    warning:
+      # Warning threshold multiplier
+      threshold_multiplier: 0.8
+
+    critical:
+      # Critical threshold multiplier
+      threshold_multiplier: 1.0
+
+  # Cooldown period (minutes)
+  cooldown_minutes: 60

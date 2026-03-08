@@ -212,13 +212,180 @@ def quantize(
 
 
 @app.command()
+def review(
+    dataset: str = typer.Option("emotion-review", help="Argilla dataset name"),
+    output_path: str = typer.Option("data/labeled/argilla_reviewed.jsonl"),
+):
+    """Pull human-reviewed annotations from Argilla."""
+    try:
+        from finetune.infrastructure.data_sources.argilla_reviewer import ArgillaReviewer
+    except ImportError:
+        typer.echo("Error: Argilla not installed. Run: pip install argilla", err=True)
+        raise typer.Exit(1)
+
+    reviewer = ArgillaReviewer()
+    reviewed = reviewer.pull_reviewed(dataset)
+
+    repo = FileDatasetRepository()
+    repo.save_samples(reviewed, output_path)
+    typer.echo(f"Pulled {len(reviewed)} reviewed samples to {output_path}")
+
+
+@app.command()
+def push_dataset(
+    version: str = typer.Option(..., help="Dataset version (e.g., v1.0)"),
+    dataset_type: str = typer.Option("train", help="Dataset split to push"),
+    hf: bool = typer.Option(True, help="Push to HuggingFace Hub"),
+):
+    """Push dataset to HuggingFace Hub."""
+    from finetune.infrastructure.registry.huggingface_dataset_publisher import HuggingFaceDatasetPublisher
+
+    dataset_path = f"data/datasets/{version}/{dataset_type}.jsonl"
+    if not os.path.exists(dataset_path):
+        typer.echo(f"Error: Dataset not found at {dataset_path}", err=True)
+        raise typer.Exit(1)
+
+    publisher = HuggingFaceDatasetPublisher()
+    url = publisher.publish(dataset_path, version)
+    typer.echo(f"Dataset pushed to: {url}")
+
+
+@app.command()
+def monitor_drift(
+    baseline_version: str = typer.Option("v1.0", help="Baseline version to compare against"),
+    current_version: str = typer.Option("latest", help="Current version"),
+    alert: bool = typer.Option(False, help="Send alert if drift detected"),
+):
+    """Monitor data and performance drift."""
+    from finetune.domain.services.data_drift_detector import DataDriftDetector
+    from finetune.domain.services.performance_drift_detector import PerformanceDriftDetector
+    from finetune.infrastructure.monitoring.baseline_store import BaselineStore
+    from finetune.infrastructure.observability.notification_client import get_notification_client
+
+    baseline_store = BaselineStore()
+
+    # Load baselines
+    baseline = baseline_store.load_baseline(baseline_version)
+    current = baseline_store.load_baseline(current_version)
+
+    if not baseline or not current:
+        typer.echo("Error: Baseline not found", err=True)
+        raise typer.Exit(1)
+
+    # Check data drift
+    data_detector = DataDriftDetector()
+    data_results = data_detector.detect(
+        baseline.get("label_distribution", {}),
+        current.get("label_distribution", {}),
+    )
+
+    # Check performance drift
+    perf_detector = PerformanceDriftDetector()
+    perf_results = perf_detector.detect(
+        baseline.get("metrics", {}),
+        current.get("metrics", {}),
+    )
+
+    # Report results
+    typer.echo("=== Drift Detection Results ===")
+    typer.echo(f"\nBaseline: {baseline_version}")
+    typer.echo(f"Current: {current_version}\n")
+
+    typer.echo("Data Drift:")
+    for r in data_results:
+        status = "⚠️ DRIFT" if r.has_drift else "✅ OK"
+        typer.echo(f"  {r.metric}: {r.value:.4f} (threshold: {r.threshold}) {status}")
+
+    typer.echo("\nPerformance Drift:")
+    for r in perf_results:
+        status = "⚠️ DRIFT" if r.has_drift else "✅ OK"
+        typer.echo(f"  {r.metric}: {r.current_value:.4f} (baseline: {r.baseline_value:.4f}) {status}")
+
+    # Send alert if drift detected
+    has_drift = any(r.has_drift for r in data_results + perf_results)
+    if alert and has_drift:
+        notification = get_notification_client()
+        notification.notify_drift_alert(
+            drift_type="data" if any(r.has_drift for r in data_results) else "performance",
+            metric="multiple",
+            current=1.0,
+            threshold=0.0,
+        )
+        typer.echo("\n⚠️ Alert sent!")
+
+
+@app.command()
+def canary_deploy(
+    version: str = typer.Option(..., help="Model version to deploy"),
+    traffic: int = typer.Option(10, help="Initial traffic percentage"),
+    config: str = typer.Option("configs/deployment/canary.yml"),
+):
+    """Deploy model to canary with gradual rollout."""
+    import subprocess
+
+    result = subprocess.run(
+        ["python", "scripts/deploy_canary.py", "--version", version, "--traffic", str(traffic), "--config", config],
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        typer.echo(f"Error: {result.stderr}", err=True)
+        raise typer.Exit(1)
+    typer.echo(result.stdout)
+
+
+@app.command()
+def rollback(
+    version: str = typer.Option(..., help="Version to rollback from"),
+    config: str = typer.Option("configs/deployment/canary.yml"),
+):
+    """Rollback to previous model version."""
+    import subprocess
+
+    result = subprocess.run(
+        ["python", "scripts/deploy_canary.py", "--version", version, "--rollback", "--config", config],
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        typer.echo(f"Error: {result.stderr}", err=True)
+        raise typer.Exit(1)
+    typer.echo(result.stdout)
+
+
+@app.command()
 def pipeline(
     source: str = typer.Option("data/raw/extract.csv"),
     config: str = typer.Option("qwen2.5_1.5b_lora"),
     version: str = typer.Option("v1.0"),
+    enable_mlflow: bool = typer.Option(False, help="Enable MLflow logging"),
+    enable_observability: bool = typer.Option(False, help="Enable Langfuse tracing"),
 ):
     """Run full pipeline Stage 1 → 6."""
     typer.echo("=== Starting full pipeline ===")
+
+    # Setup MLflow if enabled
+    mlflow_registry = None
+    if enable_mlflow:
+        try:
+            from finetune.infrastructure.registry.mlflow_registry import MLflowRegistry
+            mlflow_registry = MLflowRegistry()
+            typer.echo("MLflow logging enabled")
+        except ImportError:
+            typer.echo("Warning: MLflow not available", err=True)
+
+    # Setup observability if enabled
+    if enable_observability:
+        try:
+            from finetune.infrastructure.observability.langfuse_tracer import is_enabled
+            if is_enabled():
+                typer.echo("Langfuse tracing enabled")
+            else:
+                typer.echo("Warning: Langfuse not configured", err=True)
+        except ImportError:
+            typer.echo("Warning: Langfuse not available", err=True)
+
+    # Run pipeline steps
     collect(source=source)
     label()
     build(version=version)

@@ -106,6 +106,21 @@ class MLflowRegistry(IModelRegistryRepository):
         )
         return registry_uri
 
+    def promote_to_staging(self, version: str) -> None:
+        """Transition a model version to Staging."""
+        from mlflow.tracking import MlflowClient
+
+        self._ensure_configured()
+        client = MlflowClient()
+        client.transition_model_version_stage(
+            name=self.registered_model_name,
+            version=version,
+            stage="Staging",
+        )
+        logger.info(
+            "Promoted %s v%s to Staging", self.registered_model_name, version
+        )
+
     def promote_to_production(self, version: str) -> None:
         """Transition a staged model version to Production."""
         from mlflow.tracking import MlflowClient

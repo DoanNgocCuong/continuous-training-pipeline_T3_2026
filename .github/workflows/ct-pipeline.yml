@@ -1,0 +1,169 @@
+# Emotion CT Pipeline - GitHub Actions Workflow
+# Scheduled and manual pipeline for continuous training
+
+name: Emotion CT Pipeline
+
+on:
+  # Scheduled run: Weekly on Monday at 2 AM UTC
+  schedule:
+    - cron: "0 2 * * 1"
+
+  # Manual trigger
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version tag (e.g., v1.0)"
+        required: true
+        type: string
+        default: "v1.0"
+      skip_labeling:
+        description: "Skip AI labeling step"
+        required: false
+        type: boolean
+        default: false
+      skip_training:
+        description: "Skip training step"
+        required: false
+        type: boolean
+        default: false
+
+  # Trigger on push to main for data changes
+  push:
+    paths:
+      - 'data/raw/**'
+    branches:
+      - main
+
+env:
+  OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+  HF_TOKEN: ${{ secrets.HF_TOKEN }}
+  MLFLOW_TRACKING_URI: ${{ secrets.MLFLOW_TRACKING_URI }}
+
+jobs:
+  # Check if there's enough new data
+  check-data:
+    name: Check Data Availability
+    runs-on: ubuntu-latest
+    outputs:
+      has_data: ${{ steps.check.outputs.has_data }}
+      new_samples: ${{ steps.check.outputs.new_samples }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check for new data
+        id: check
+        run: |
+          # Count new samples since last run
+          LAST_RUN=$(cat .last_run_timestamp 2>/dev/null || echo "2020-01-01")
+          NEW_SAMPLES=$(find data/raw -name "*.csv" -newer "$LAST_RUN" -exec wc -l {} + | tail -1 | awk '{print $1-1}')
+          echo "new_samples=$NEW_SAMPLES" >> $GITHUB_OUTPUT
+          echo "has_data=$( [ $NEW_SAMPLES -ge 500 ] && echo 'true' || echo 'false' )" >> $GITHUB_OUTPUT
+
+      - name: Update last run timestamp
+        run: date > .last_run_timestamp
+
+  # Run pipeline steps
+  pipeline:
+    name: Run CT Pipeline
+    needs: check-data
+    if: needs.check-data.outputs.has_data == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Collect data
+        if: ${{ !inputs.skip_labeling }}
+        run: |
+          python -m finetune.main collect --source data/raw/extract.csv
+
+      - name: Label data
+        if: ${{ !inputs.skip_labeling }}
+        run: |
+          python -m finetune.main label
+
+      - name: Build datasets
+        run: |
+          python -m finetune.main build --version ${{ github.event.inputs.version }}
+
+      - name: Train model
+        if: ${{ !inputs.skip_training }}
+        run: |
+          python -m finetune.main train --version ${{ github.event.inputs.version }}
+
+      - name: Evaluate model
+        run: |
+          python -m finetune.main evaluate --version ${{ github.event.inputs.version }}
+
+      - name: Run promotion decision
+        run: |
+          python -m finetune.main decide
+
+      - name: Upload eval results
+        uses: actions/upload-artifact@v4
+        with:
+          name: eval-results
+          path: data/artifacts/latest/eval_result.json
+
+      - name: Push to HuggingFace (if promoted)
+        if: success()
+        run: |
+          # Only push if model was promoted
+          DECISION=$(cat data/artifacts/latest/decision.json | jq -r .decision)
+          if [ "$DECISION" == "promote" ]; then
+            python -m finetune.main publish --version ${{ github.event.inputs.version }}
+          fi
+
+  # Notify on completion
+  notify:
+    name: Send Notifications
+    needs: [check-data, pipeline]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Send Slack notification
+        if: env.SLACK_WEBHOOK_URL != ''
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          fields: repo,message,commit,author
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - name: Comment on PR
+        if: github.event_name == 'workflow_dispatch'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const decision = '${{ needs.pipeline.outputs.decision || "unknown" }}';
+            const version = '${{ github.event.inputs.version }}';
+            const result = '${{ needs.pipeline.result }}';
+
+            const body = `## CT Pipeline Results
+
+            **Version**: ${version}
+            **Status**: ${result}
+            **Decision**: ${decision}
+
+            Check the [workflow run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) for details.
+            `;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            })

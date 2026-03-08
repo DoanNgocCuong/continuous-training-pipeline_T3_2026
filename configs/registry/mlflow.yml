@@ -1,0 +1,74 @@
+# MLflow Configuration
+# Experiment tracking and model registry
+
+# Tracking server
+tracking:
+  # MLflow tracking URI (use local or remote)
+  uri: ${MLFLOW_TRACKING_URI:-http://localhost:5000}
+
+  # Authentication (if using remote)
+  username: ${MLFLOW_USERNAME:-}
+  password: ${MLFLOW_PASSWORD:-}
+
+# Experiment settings
+experiment:
+  # Default experiment name
+  name: emotion-ct-pipeline
+
+  # Artifact root (where to store model artifacts)
+  artifact_root: s3://mlflow-artifacts/emotion-pipeline
+
+  # Create experiment if not exists
+  create_if_not_exists: true
+
+# Model registry
+registry:
+  # Registered model name
+  registered_model_name: emotion-classifier
+
+  # Model stages
+  stages:
+    - None        # No stage
+    - Staging     # For canary/testing
+    - Production  # Live in production
+    - Archived    # Deprecate but keep
+
+  # Default stage after training
+  default_training_stage: Staging
+
+  # Default stage after promotion
+  default_promotion_stage: Production
+
+# Logging settings
+logging:
+  # Log parameters
+  log_params: true
+
+  # Log metrics
+  log_metrics: true
+
+  # Log artifacts
+  log_artifacts: true
+
+  # Log model
+  log_model: true
+
+  # Metrics to track
+  metrics:
+    - accuracy
+    - f1_macro
+    - f1_weighted
+    - precision
+    - recall
+    - training_loss
+    - eval_loss
+
+  # Parameters to track
+  params:
+    - model_name
+    - base_model
+    - lora_r
+    - lora_alpha
+    - learning_rate
+    - num_epochs
+    - batch_size
