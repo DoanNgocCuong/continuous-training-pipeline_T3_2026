@@ -9,8 +9,8 @@ from finetune.domain.value_objects import AgreementStatus, EmotionLabel
 _CHATML_SYSTEM = (
     "You are an emotion classifier for Pika Robot, a children's educational robot. "
     "Given the robot's previous response and current response, classify the emotion "
-    "of the CURRENT response into exactly one of these 8 labels: "
-    "happy, achievement, thinking, calm, sad, worried, angry, surprised. "
+    "of the CURRENT response into exactly one of these 5 labels: "
+    "happy, achievement, thinking, calm, surprised. "
     "Respond with ONLY the emotion label."
 )
 

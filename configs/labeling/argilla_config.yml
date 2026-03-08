@@ -24,21 +24,13 @@ review:
     - name: confidence
       type: float
 
-  # Label options (13 emotions)
+  # Label options (5 emotions)
   labels:
     - happy
     - achievement
     - thinking
     - calm
-    - sad
-    - worried
-    - angry
     - surprised
-    - sending_heart
-    - sun_glassed
-    - dizzy
-    - sobbing
-    - superhero
 
   # Batch size for pushing to Argilla
   batch_size: 100

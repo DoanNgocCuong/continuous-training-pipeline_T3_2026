@@ -66,7 +66,7 @@ Fine-tuned model for emotion classification for Pika Robot.
 - **Base Model**: {self.base_model}
 - **Version**: {version}
 - **Task**: Multi-class emotion classification
-- **Emotions**: happy, achievement, thinking, calm, sad, worried, angry, surprised, sending_heart, sun_glassed, dizzy, sobbing, superhero
+- **Emotions**: happy, achievement, thinking, calm, surprised
 - **Fine-tuning Method**: LoRA (r=16, alpha=32)
 
 ## Evaluation Results

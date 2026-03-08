@@ -8,10 +8,9 @@ from finetune.domain.value_objects import AgreementStatus, EmotionLabel
 
 logger = logging.getLogger(__name__)
 
-# 8 emotion labels — used as allowed values in Argilla question
+# 5 emotion labels — used as allowed values in in Argilla question
 _EMOTION_LABELS = [
-    "happy", "achievement", "thinking", "calm", "sad", "worried",
-    "angry", "surprised",
+    "happy", "achievement", "thinking", "calm", "surprised",
 ]
 
 
@@ -27,9 +26,9 @@ class ArgillaReviewer:
         self,
         api_url: Optional[str] = None,
         api_key: Optional[str] = None,
-        workspace: str = "admin",
+        workspace: Optional[str] = None,
     ):
-        self.api_url = api_url or os.getenv("ARGILLA_API_URL", "http://localhost:6901")
+        self.api_url = api_url or os.getenv("ARGILLA_API_URL", "http://localhost:6900")
         self.api_key = api_key or os.getenv("ARGILLA_API_KEY", "argilla.apikey")
         self.workspace = workspace
         self._client = None  # lazy init
@@ -58,14 +57,24 @@ class ArgillaReviewer:
         for s in samples:
             # Build metadata for reviewers
             metadata: dict = {"source": s.source, "sample_id": s.id}
-            if s.ai_label:
-                metadata["ai_label"] = s.ai_label.value
-            if s.model_output:
-                metadata["model_output"] = s.model_output.value
 
-            # Pre-fill suggestion from AI label if available
+            # Pre-fill suggestions - prioritize human_label, then ai_label
             suggestions = []
-            if s.ai_label and s.ai_label != EmotionLabel.UNKNOWN:
+
+            # 1. Human label (pre-labeled data) - highest priority
+            if s.human_label and s.human_label != EmotionLabel.UNKNOWN:
+                metadata["human_label"] = s.human_label.value
+                suggestions.append(
+                    rg.Suggestion(
+                        question_name="emotion_label",
+                        value=s.human_label.value,
+                        agent="human",
+                        score=1.0,
+                    )
+                )
+            # 2. AI label - as fallback/pre-fill
+            elif s.ai_label and s.ai_label != EmotionLabel.UNKNOWN:
+                metadata["ai_label"] = s.ai_label.value
                 suggestions.append(
                     rg.Suggestion(
                         question_name="emotion_label",
@@ -74,6 +83,9 @@ class ArgillaReviewer:
                         score=0.9,
                     )
                 )
+
+            if s.model_output:
+                metadata["model_output"] = s.model_output.value
 
             record = rg.Record(
                 fields={"text": s.input_text},
@@ -162,12 +174,20 @@ class ArgillaReviewer:
     def _get_or_create_dataset(self, client, dataset_name: str):
         import argilla as rg
 
+        # Get workspace
+        workspace = client.workspaces.default
+
+        # Try to get dataset - if not found, create new
         try:
-            return client.datasets(name=dataset_name, workspace=self.workspace)
+            ds = client.datasets(name=dataset_name, workspace=workspace.name)
+            if ds:
+                logger.info("Found existing dataset '%s'", dataset_name)
+                return ds
         except Exception:
             pass
 
         # Dataset does not exist — create with emotion LabelQuestion
+        logger.info("Creating new dataset '%s'", dataset_name)
         settings = rg.Settings(
             fields=[
                 rg.TextField(name="text", title="Robot Response", required=True),
@@ -183,6 +203,7 @@ class ArgillaReviewer:
             metadata=[
                 rg.TermsMetadataProperty(name="source"),
                 rg.TermsMetadataProperty(name="ai_label"),
+                rg.TermsMetadataProperty(name="human_label"),
                 rg.TermsMetadataProperty(name="model_output"),
                 rg.TermsMetadataProperty(name="sample_id"),
             ],
@@ -191,9 +212,10 @@ class ArgillaReviewer:
                 "The AI suggestion is pre-filled — override if you disagree."
             ),
         )
+        # Create dataset with workspace
         dataset = rg.Dataset(
             name=dataset_name,
-            workspace=self.workspace,
+            workspace=workspace.name,
             settings=settings,
             client=client,
         )

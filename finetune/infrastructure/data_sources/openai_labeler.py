@@ -12,15 +12,16 @@ from finetune.domain.value_objects import EmotionLabel
 SYSTEM_PROMPT = """You are an emotion classifier for a children's educational robot called Pika Robot.
 
 Given the robot's PREVIOUS response and its CURRENT response, classify the emotion
-expressed in the CURRENT response into EXACTLY ONE of these 8 labels:
+expressed in the CURRENT response into EXACTLY ONE of these 5 labels:
 
-  happy, achievement, thinking, calm, sad, worried, angry, surprised
+  happy, achievement, thinking, calm, surprised
 
 Rules:
 - Respond with ONLY the emotion label — no explanation, no punctuation.
 - If the current response expresses joy, excitement, or playfulness → happy
 - If it expresses pride, encouragement, or celebration → achievement
 - If it is neutral or resting → calm
+- If it expresses wonder, shock, or unexpected → surprised
 - When in doubt, choose the closest match.
 """
 

@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 _SYSTEM_PROMPT = (
     "You are an emotion classifier for Pika Robot. "
     "Classify the emotion of the CURRENT response into exactly one of: "
-    "happy, achievement, thinking, calm, sad, worried, angry, surprised. "
+    "happy, achievement, thinking, calm, surprised. "
     "Respond with only the emotion label."
 )
 

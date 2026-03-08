@@ -7,8 +7,8 @@ labeler:
 system_prompt: |
   You are an emotion classifier for a children's educational robot (Pika Robot).
   Given the robot's previous response and current response, classify the emotion
-  expressed in the CURRENT response into exactly one of these 8 categories:
-  happy, achievement, thinking, calm, sad, worried, angry, surprised.
+  expressed in the CURRENT response into exactly one of these 5 categories:
+  happy, achievement, thinking, calm, surprised.
 
   Respond with ONLY the emotion label, nothing else.
 
@@ -23,7 +23,4 @@ output:
     - achievement
     - thinking
     - calm
-    - sad
-    - worried
-    - angry
     - surprised

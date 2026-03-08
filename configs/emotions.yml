@@ -3,7 +3,4 @@ emotion_groups:
   achievement: [celebration, encouraging, encouraging_2, thats_right, thats_right_2, proud, proud_2]
   thinking: [thinking, curious]
   calm: [calm, idle, idle_2, no_problem]
-  sad: [sad]
-  worried: [worry, afraid]
-  angry: [angry, noisy]
   surprised: [surprised]
