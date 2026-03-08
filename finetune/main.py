@@ -34,16 +34,26 @@ app = typer.Typer(name="finetune", help="Emotion Continuous Training Pipeline")
 
 
 @app.command()
-def collect(source: str = typer.Option("data/raw/extract.csv", help="Path to CSV file")):
-    """Stage 1: Load raw data from CSV."""
+def collect(
+    source: str = typer.Option("data/raw/unlabeled/extract_1k.csv", help="Path to CSV/XLSX file"),
+    prelabeled: bool = typer.Option(False, help="Data already has labels (skip AI labeling)"),
+):
+    """Stage 1: Load raw data from CSV/XLSX."""
     loader = CsvDataSourceLoader()
     usecase = CollectDataUseCase(data_source=loader)
-    samples = usecase.execute(source)
+    samples = usecase.execute(source, has_label=prelabeled)
     typer.echo(f"Loaded {len(samples)} samples from {source}")
 
     repo = FileDatasetRepository()
-    repo.save_samples(samples, "data/labeled/raw_samples.jsonl")
-    typer.echo("Saved to data/labeled/raw_samples.jsonl")
+
+    if prelabeled:
+        # Pre-labeled data: go directly to approved (bypass AI labeling)
+        typer.echo("Pre-labeled mode: saving directly to approved.jsonl")
+        repo.save_samples(samples, "data/labeled/agreed/approved.jsonl")
+    else:
+        # Unlabeled: save to raw_samples for AI labeling
+        repo.save_samples(samples, "data/labeled/raw_samples.jsonl")
+        typer.echo("Saved to data/labeled/raw_samples.jsonl (run 'label' next)")
 
 
 @app.command()
@@ -245,6 +255,28 @@ def review(
 
 
 @app.command()
+def audit(
+    input_path: str = typer.Option("data/labeled/agreed/approved.jsonl", help="Path to pre-labeled data"),
+    dataset: str = typer.Option("emotion-audit", help="Argilla dataset name for auditing"),
+):
+    """Push pre-labeled data to Argilla for human audit/verification."""
+    try:
+        from finetune.infrastructure.data_sources.argilla_reviewer import ArgillaReviewer
+    except ImportError:
+        typer.echo("Error: Argilla not installed. Run: pip install argilla", err=True)
+        raise typer.Exit(1)
+
+    repo = FileDatasetRepository()
+    samples = repo.load_samples(input_path)
+    typer.echo(f"Loaded {len(samples)} pre-labeled samples from {input_path}")
+
+    reviewer = ArgillaReviewer()
+    pushed = reviewer.push_for_review(samples, dataset_name=dataset)
+    typer.echo(f"Pushed {pushed} samples to Argilla dataset '{dataset}' for audit")
+    typer.echo(f"View at: http://localhost:6901 (login: admin / adminpassword)")
+
+
+@app.command()
 def push_dataset(
     version: str = typer.Option(..., help="Dataset version (e.g., v1.0)"),
     dataset_type: str = typer.Option("train", help="Dataset split to push"),
@@ -368,7 +400,7 @@ def rollback(
 
 @app.command()
 def pipeline(
-    source: str = typer.Option("data/raw/extract.csv"),
+    source: str = typer.Option("data/raw/unlabeled/extract_1k.csv"),
     config: str = typer.Option("qwen2.5_1.5b_lora"),
     version: str = typer.Option("v1.0"),
     enable_mlflow: bool = typer.Option(False, help="Enable MLflow logging"),

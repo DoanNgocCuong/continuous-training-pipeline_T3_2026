@@ -38,7 +38,7 @@ docker compose -f docker-compose-infra.yml --profile all up -d
 **Services:**
 | Service | URL | Credentials |
 |---------|-----|-------------|
-| Argilla UI | http://localhost:6901 | admin / adminpassword |
+| Argilla UI | http://localhost:6900 | admin / adminpassword |
 | MLflow | http://localhost:5010 | (no auth) |
 | MinIO | http://localhost:9011 | minioadmin / minioadmin |
 
@@ -68,7 +68,7 @@ MLFLOW_TRACKING_URI=http://localhost:5010
 ### Từ CSV (Datadog export)
 
 ```bash
-python -m finetune.main collect --source data/raw/extract.csv
+python -m finetune.main collect --source data/raw/unlabeled/extract_1k.csv
 ```
 
 **Output:** `data/labeled/raw_samples.jsonl`
@@ -84,7 +84,55 @@ df.to_csv('data/raw/extract.csv', index=False)
 "
 
 # Then collect
-python -m finetune.main collect --source data/raw/extract.csv
+python -m finetune.main collect --source data/raw/unlabeled/extract_1k.csv
+```
+
+### Data Files Convention
+
+```
+data/
+├── raw/
+│   ├── unlabeled/                    # Chưa có nhãn - cần qua Label step
+│   │   ├── extract.csv
+│   │   ├── extract_2026.csv
+│   │   └── results_v3_grouped_100kRequests.xlsx
+│   └── labeled/                     # Đã có nhãn sẵn (human expert)
+│       └── prelabeled.xlsx
+```
+
+**2 Loại Data:**
+
+| Loại | Location | Format | Flow |
+|------|----------|--------|------|
+| Unlabeled | `data/raw/unlabeled/` | CSV/XLSX (chỉ có `text`) | Collect → Label → Push to Argilla → Build |
+| Pre-labeled | `data/raw/labeled/` | XLSX (có `text` + `label`) | Collect → Audit in Argilla → Build |
+
+> **Lưu ý**: Sau khi chạy Collect/Label, cần push lên Argilla UI để xem và review.
+
+### Pre-labeled Data (đã có nhãn)
+
+```bash
+# Convert pre-labeled xlsx to csv
+python -c "
+import pandas as pd
+df = pd.read_excel('data/raw/labeled/prelabeled.xlsx')
+df.to_csv('data/raw/labeled/prelabeled.csv', index=False)
+"
+
+# Collect với pre-labeled flag
+python -m finetune.main collect --source data/raw/labeled/prelabeled.csv --prelabeled
+```
+
+**Output:** `data/labeled/agreed/approved.jsonl` (đi thẳng vào approved)
+
+### Audit Pre-labeled Data (kiểm tra chất lượng)
+
+```bash
+# Push lên Argilla để human audit
+python -m finetune.main audit --input-path data/labeled/agreed/approved.jsonl --dataset emotion-audit
+
+# View in UI: http://localhost:6900
+# Dataset: emotion-audit
 ```
 
 ---
@@ -105,16 +153,20 @@ python -m finetune.main label \
 
 ### Xem labels trong Argilla UI
 
+#### Unlabeled Data Flow (cần AI label trước)
+
 ```bash
-# Bước 1: Label trước (AI labeling)
+# Bước 1: Collect + AI Label
+python -m finetune.main collect --source data/raw/unlabeled/extract_1k.csv
 python -m finetune.main label --input-path data/labeled/raw_samples.jsonl
 
-# Bước 2: Push flagged samples lên Argilla để human review
+# Bước 2: Push lên Argilla UI để view/review
 python -m finetune.main label --push-to-argilla
 
 # Bước 3: Mở browser
 # http://localhost:6900
 # Login: admin / adminpassword
+# Dataset: emotion-review
 
 # Bước 4: Sau khi annotate trong UI, pull về
 python -m finetune.main review --dataset emotion-review
@@ -123,10 +175,32 @@ python -m finetune.main review --dataset emotion-review
 # (Đang implement...)
 ```
 
+#### Pre-labeled Data Flow (đã có nhãn sẵn)
+
+```bash
+# Bước 1: Collect pre-labeled data
+python -m finetune.main collect --source data/raw/labeled/prelabeled.csv --prelabeled
+
+# Bước 2: Push lên Argilla UI để audit/verify
+python -m finetune.main audit
+
+# Bước 3: Mở browser
+# http://localhost:6900
+# Login: admin / adminpassword
+# Dataset: emotion-audit
+```
+
 **Argilla Credentials:**
 - URL: http://localhost:6900
 - Username: admin
 - Password: adminpassword
+
+**Trong Argilla UI:**
+- Dataset `emotion-review` - Cho unlabeled data cần review
+- Dataset `emotion-audit` - Cho pre-labeled data cần audit
+- Cột `text` = nội dung cần xem
+- Metadata `ai_label` = gợi ý từ AI (có thể override)
+- Sau khi annotate, record sẽ có status "submitted"
 
 ### Xem nhanh label distribution
 
@@ -259,7 +333,7 @@ python -m finetune.main publish \
 
 ```bash
 # Bước 1: Collect
-python -m finetune.main collect --source data/raw/extract.csv
+python -m finetune.main collect --source data/raw/unlabeled/extract_1k.csv
 
 # Bước 2: Label
 python -m finetune.main label
@@ -336,7 +410,7 @@ open http://localhost:5010
 
 ```bash
 # Mở browser
-open http://localhost:6901
+open http://localhost:6900
 # Login: admin / adminpassword
 ```
 

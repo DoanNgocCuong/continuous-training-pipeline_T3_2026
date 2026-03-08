@@ -7,9 +7,6 @@ class EmotionLabel(str, Enum):
     ACHIEVEMENT = "achievement"
     THINKING = "thinking"
     CALM = "calm"
-    SAD = "sad"
-    WORRIED = "worried"
-    ANGRY = "angry"
     SURPRISED = "surprised"
     UNKNOWN = "unknown"
 

@@ -11,16 +11,17 @@ logger = logging.getLogger(__name__)
 _SYSTEM_PROMPT = """\
 You are an emotion classifier for a children's educational robot called Pika Robot.
 
-Given the robot's PREVIOUS response and its CURRENT response, classify the emotion
-expressed in the CURRENT response into EXACTLY ONE of these 8 labels:
+Given the robot's response, classify the emotion into EXACTLY ONE of these 5 labels:
 
-  happy, achievement, thinking, calm, sad, worried, angry, surprised
+  happy, achievement, thinking, calm, surprised
 
 Rules:
 - Respond with ONLY the emotion label — no explanation, no punctuation.
-- If the current response expresses joy, excitement, or playfulness → happy
+- If the response expresses joy, excitement, or playfulness → happy
 - If it expresses pride, encouragement, or celebration → achievement
-- If it is neutral or resting → calm
+- If the robot is thinking, asking questions, or processing → thinking
+- If it is neutral, resting, or idle → calm
+- If it expresses wonder, curiosity, or unexpected situation → surprised
 - When in doubt, choose the closest match.
 """
 
@@ -109,7 +110,6 @@ class DistilabelLabeler(ILabelerRepository):
                     api_key=os.getenv("OPENAI_API_KEY"),
                     generation_kwargs={
                         "temperature": self.temperature,
-                        "max_tokens": self.max_new_tokens,
                     },
                 ),
                 system_prompt=_SYSTEM_PROMPT,
