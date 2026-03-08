@@ -1,0 +1,38 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run *)",
+      "Bash(npm *)",
+      "Bash(python -m pytest *)",
+      "Bash(python *)",
+      "Bash(docker *)",
+      "Bash(git *)",
+      "Bash(make *)",
+      "Glob(*)",
+      "Grep(*)",
+      "Read(*)",
+      "Edit(*)",
+      "Write(*)",
+      "MultiEdit(*)",
+      "NotebookEdit(*)"
+    ],
+    "deny": [
+      "Bash(rm -rf /node_modules)",
+      "Bash(rm -rf /dist)",
+      "Bash(sudo *)",
+      "Bash(chmod 777 *)",
+      "WebFetch(*)"
+    ]
+  },
+  "appearance": {
+    "theme": "dark",
+    "fontSize": 14,
+    "fontFamily": "JetBrains Mono"
+  },
+  "behavior": {
+    "autoApprove": false,
+    "compactThreshold": "50%",
+    "maxTokens": 64000,
+    "outputStyle": "explanatory"
+  }
+}
