@@ -106,9 +106,27 @@ python -m finetune.main label \
 ### Xem labels trong Argilla UI
 
 ```bash
-# Push to Argilla (nếu muốn view trong UI)
-# Đang implement...
+# Bước 1: Label trước (AI labeling)
+python -m finetune.main label --input-path data/labeled/raw_samples.jsonl
+
+# Bước 2: Push flagged samples lên Argilla để human review
+python -m finetune.main label --push-to-argilla
+
+# Bước 3: Mở browser
+# http://localhost:6900
+# Login: admin / adminpassword
+
+# Bước 4: Sau khi annotate trong UI, pull về
+python -m finetune.main review --dataset emotion-review
+
+# Bước 5: Merge với approved data
+# (Đang implement...)
 ```
+
+**Argilla Credentials:**
+- URL: http://localhost:6900
+- Username: admin
+- Password: adminpassword
 
 ### Xem nhanh label distribution
 

@@ -29,7 +29,7 @@ class ArgillaReviewer:
         api_key: Optional[str] = None,
         workspace: str = "admin",
     ):
-        self.api_url = api_url or os.getenv("ARGILLA_API_URL", "http://localhost:6900")
+        self.api_url = api_url or os.getenv("ARGILLA_API_URL", "http://localhost:6901")
         self.api_key = api_key or os.getenv("ARGILLA_API_KEY", "argilla.apikey")
         self.workspace = workspace
         self._client = None  # lazy init

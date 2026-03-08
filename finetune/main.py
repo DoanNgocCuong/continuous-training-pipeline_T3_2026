@@ -50,6 +50,7 @@ def collect(source: str = typer.Option("data/raw/extract.csv", help="Path to CSV
 def label(
     input_path: str = typer.Option("data/labeled/raw_samples.jsonl"),
     model: str = typer.Option("gpt-4o-mini"),
+    push_to_argilla: bool = typer.Option(False, help="Push flagged samples to Argilla for human review"),
 ):
     """Stage 2: AI label + 3-way agreement."""
     repo = FileDatasetRepository()
@@ -65,6 +66,18 @@ def label(
 
     repo.save_samples(approved, "data/labeled/agreed/approved.jsonl")
     repo.save_samples(flagged, "data/labeled/agreed/flagged.jsonl")
+
+    # Push flagged samples to Argilla for human review
+    if push_to_argilla and flagged:
+        try:
+            from finetune.infrastructure.data_sources.argilla_reviewer import ArgillaReviewer
+            reviewer = ArgillaReviewer()
+            pushed = reviewer.push_for_review(flagged, dataset_name="emotion-review")
+            typer.echo(f"Pushed {pushed} flagged samples to Argilla for review")
+        except ImportError:
+            typer.echo("Warning: Argilla not installed. Run: pip install argilla", err=True)
+        except Exception as e:
+            typer.echo(f"Warning: Failed to push to Argilla: {e}", err=True)
 
 
 @app.command()

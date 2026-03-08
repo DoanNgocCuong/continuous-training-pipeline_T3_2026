@@ -108,7 +108,7 @@ services:
     container_name: ct-argilla
     profiles: [ argilla, all ]
     ports:
-      - "${ARGILLA_PORT:-6901}:6900"
+      - "${ARGILLA_PORT:-6900}:6900"
     environment:
       ARGILLA_ELASTICSEARCH: http://elasticsearch:9200
       # asyncpg driver cho PostgreSQL async
